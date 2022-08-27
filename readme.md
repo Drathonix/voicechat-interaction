@@ -1,11 +1,12 @@
+This is the unofficial forge port of Voicechat Interaction. I ported this purely for use on my own servers.
+
 # Voice Chat Interaction
 
-This server side Fabric mod allows Simple Voice Chat to interact with your Minecraft world.
+This server side Forge mod allows Simple Voice Chat to interact with your Minecraft world.
 
 ## Downloads
 
-- [Modrinth](https://modrinth.com/mod/voice-chat-interaction)
-- [Third party Paper port](https://github.com/iGalaxyYT/voicechat-interaction-paper)
+- A public download link for forge is not available. I do not own this mod. I will not be uploading a jar file. If you do want to download you can contact me on discord Drathon#0761. I simply will not upload what is mostly Henkelmax's work without permission.
 
 ## Features
 
