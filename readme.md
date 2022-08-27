@@ -6,7 +6,8 @@ This server side Forge mod allows Simple Voice Chat to interact with your Minecr
 
 ## Downloads
 
-- A public download link for forge is not available. I do not own this mod. I will not be uploading a jar file. If you do want to download you can contact me on discord Drathon#0761. I simply will not upload what is mostly Henkelmax's work without permission.
+- A public download link for forge is not available. I do not own this mod. I will not be uploading a jar file. If you do want to download you can contact me on discord by joining here [ViciousDevelopment](https://discord.gg/rsYYBgwnRJ) sending me a friend request is unnecessary.
+
 
 ## Features
 
