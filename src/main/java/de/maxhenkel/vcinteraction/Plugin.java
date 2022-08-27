@@ -1,9 +1,6 @@
 package de.maxhenkel.vcinteraction;
 
-import de.maxhenkel.voicechat.api.VoicechatApi;
-import de.maxhenkel.voicechat.api.VoicechatConnection;
-import de.maxhenkel.voicechat.api.VoicechatPlugin;
-import de.maxhenkel.voicechat.api.VoicechatServerApi;
+import de.maxhenkel.voicechat.api.*;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.events.VoicechatServerStartedEvent;
@@ -14,6 +11,7 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+@ForgeVoicechatPlugin
 public class Plugin implements VoicechatPlugin {
 
     public static VoicechatApi voicechatApi;
@@ -34,6 +32,7 @@ public class Plugin implements VoicechatPlugin {
     public void initialize(VoicechatApi api) {
         voicechatApi = api;
         cooldowns = new ConcurrentHashMap<>();
+        VoicechatInteraction.LOGGER.info("VCIForge Plugin Initialized!");
     }
 
     @Override
@@ -57,24 +56,24 @@ public class Plugin implements VoicechatPlugin {
             return;
         }
 
-        if (!VoicechatInteraction.SERVER_CONFIG.groupInteraction.get()) {
+        if (!de.maxhenkel.vcinteraction.VoicechatInteraction.SERVER_CONFIG.groupInteraction.get()) {
             if (senderConnection.isInGroup()) {
                 return;
             }
         }
 
-        if (!VoicechatInteraction.SERVER_CONFIG.whisperInteraction.get()) {
+        if (!de.maxhenkel.vcinteraction.VoicechatInteraction.SERVER_CONFIG.whisperInteraction.get()) {
             if (event.getPacket().isWhispering()) {
                 return;
             }
         }
 
         if (!(senderConnection.getPlayer().getPlayer() instanceof ServerPlayer player)) {
-            VoicechatInteraction.LOGGER.warn("Received microphone packets from non-player");
+            de.maxhenkel.vcinteraction.VoicechatInteraction.LOGGER.warn("Received microphone packets from non-player");
             return;
         }
 
-        if (!VoicechatInteraction.SERVER_CONFIG.sneakInteraction.get()) {
+        if (!de.maxhenkel.vcinteraction.VoicechatInteraction.SERVER_CONFIG.sneakInteraction.get()) {
             if (player.isCrouching()) {
                 return;
             }
@@ -87,13 +86,13 @@ public class Plugin implements VoicechatPlugin {
         decoder.resetState();
         short[] decoded = decoder.decode(event.getPacket().getOpusEncodedData());
 
-        if (AudioUtils.calculateAudioLevel(decoded) < VoicechatInteraction.SERVER_CONFIG.minActivationThreshold.get().doubleValue()) {
+        if (de.maxhenkel.vcinteraction.AudioUtils.calculateAudioLevel(decoded) < de.maxhenkel.vcinteraction.VoicechatInteraction.SERVER_CONFIG.minActivationThreshold.get().doubleValue()) {
             return;
         }
 
         player.getLevel().getServer().execute(() -> {
             if (activate(player)) {
-                player.gameEvent(VoicechatInteraction.VOICE_GAME_EVENT);
+                player.gameEvent(de.maxhenkel.vcinteraction.VoicechatInteraction.VOICE_GAME_EVENT.get());
             }
         });
     }
