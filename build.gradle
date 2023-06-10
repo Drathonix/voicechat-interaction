@@ -131,7 +131,7 @@ jar {
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
-    from configurations.shadow.collect { it.isDirectory() ? it : zipTree(it) }
+    //from configurations.shadow.collect { it.isDirectory() ? it : zipTree(it) }
 
 }
 
